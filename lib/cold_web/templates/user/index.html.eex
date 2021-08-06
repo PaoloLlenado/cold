@@ -3,4 +3,7 @@
   <p>
     <%= link "#{user.firstname} #{user.lastname}", to: Routes.user_path(@conn, :edit, user) %>
   </p>
+  <%= form_for @conn, Routes.user_path(@conn, :delete, user), [method: "delete"], fn _f -> %>
+        <%= submit "Delete" %>
+  <% end %>
 <% end %>

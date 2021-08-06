@@ -11,7 +11,7 @@ defmodule ColdWeb.UserController do
   def new(conn, _params) do
     changeset = Accounts.create_changeset()
     render(
-      conn, 
+      conn,
       "new.html",
       changeset: changeset,
       action: Routes.user_path(conn, :create)
@@ -24,7 +24,7 @@ defmodule ColdWeb.UserController do
         redirect(conn, to: Routes.user_path(conn, :index))
       {:error, changeset} ->
         render(
-          conn, 
+          conn,
           "new.html",
           changeset: changeset,
           action: Routes.user_path(conn, :create)
@@ -36,7 +36,7 @@ defmodule ColdWeb.UserController do
     user = Accounts.get_user(user_id)
     changeset = Accounts.edit_changeset(user, params)
     render(
-      conn, 
+      conn,
       "edit.html",
       changeset: changeset,
       action: Routes.user_path(conn, :update, user),
@@ -51,12 +51,18 @@ defmodule ColdWeb.UserController do
         redirect(conn, to: Routes.user_path(conn, :index))
       {:error, changeset} ->
         render(
-          conn, 
+          conn,
           "edit.html",
           changeset: changeset,
           action: Routes.user_path(conn, :update, user),
           user: user
         )
     end
+  end
+
+  def delete(conn, %{"user_id" => user_id}) do
+    user = Accounts.get_user(user_id)
+    Cold.Repo.delete(user)
+    redirect(conn, to: Routes.user_path(conn, :index))
   end
 end

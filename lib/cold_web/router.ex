@@ -22,6 +22,7 @@ defmodule ColdWeb.Router do
     post "/users/create", UserController, :create
     get "/users/:user_id/edit", UserController, :edit
     put "/users/:user_id/update", UserController, :update
+    delete "/users/:user_id/delete", UserController, :delete
   end
 
   # Other scopes may use custom stacks.
